@@ -10,4 +10,23 @@
 
 function createCartModel(config) {
 
+	var model = createListModel(config);
+
+	//sums up the price of the items in the cart
+	model.getTotalPrice = function(){
+		var idx;
+		var totalPrice = 0;
+		for (idx = 0; idx < this.items.length; ++idx) {
+		    totalPrice += this.items[idx].price;
+		}
+		return totalPrice.toFixed(2);
+
+	}; //getTotalPrice
+
+	
+	model.toJSON = function(){
+		return JSON.stringify(this.items);
+	} //toJSON
+
+	return model;
 } //createCartModel()
